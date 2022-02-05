@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body,
+    h1 {
+      margin: 20px;
+    }
+
+    body {
+      width: 500px;
+      background: #8CE0FF;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    h3 {
+      font-size: 1.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    input {
+      margin: 5px;
+    }
+
+    input[type="text"] {
+      size: 100;
+    }
+
+    #formAdicionar {
+      margin: 20px;
+    }
+
+    #voltar,
+    #gerar,
+    #gerarAdd,
+    #finalizar,
+    #finalizarAdd,
+    #adicionar,
+    .storage,
+    .itens {
+      background: #3498db;
+      background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+      background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+      background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+      background-image: -o-linear-gradient(top, #3498db, #2980b9);
+      background-image: linear-gradient(to bottom, #3498db, #2980b9);
+      -webkit-border-radius: 28;
+      -moz-border-radius: 28;
+      border-radius: 28px;
+      -webkit-box-shadow: 4px 4px 6px #666666;
+      -moz-box-shadow: 4px 4px 6px #666666;
+      box-shadow: 4px 4px 6px #666666;
+      font-family: Arial;
+      color: #ffffff;
+      font-size: 20px;
+      padding: 10px 20px 10px 20px;
+      text-decoration: none;
+      border: none;
+    }
+
+    #voltar:hover,
+    #gerar:hover,
+    #gerarAdd:hover,
+    #finalizar:hover,
+    #finalizarAdd:hover,
+    #adicionar:hover {
+      background: #3cb0fd;
+      background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+      background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+      background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+      background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+      background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+      text-decoration: none;
+    }
+
+    .storage,
+    .itens {
+      margin: 5px;
+      background: #5af5e0;
+      background-image: -webkit-linear-gradient(top, #5af5e0, #2b9cb8);
+      background-image: -moz-linear-gradient(top, #5af5e0, #2b9cb8);
+      background-image: -ms-linear-gradient(top, #5af5e0, #2b9cb8);
+      background-image: -o-linear-gradient(top, #5af5e0, #2b9cb8);
+      background-image: linear-gradient(to bottom, #5af5e0, #2b9cb8);
+    }
+
+    .storage:hover,
+    .itens:hover {
+      background: #3cb0fd;
+      background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+      background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+      background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+      background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+      background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+      text-decoration: none;
+    }
+
+    .itens {
+      font-size: 15px;
+      padding: 5px 10px 5px 10px;
+      text-decoration: none;
+      border: none;
+    }
+
+    #adicionar,
+    #voltar {
+      margin-top: 30px;
+    }
+  </style>
+  <title>String Control</title>
+</head>
+
+<body>
+  <section id="container">
+
+    <div id="formDiv">
+      <h1>String Control</h1>
+      <p>Digite a quantidade de strings: </p>
+      <input type="number" id="qtInput">
+      <input type="button" value="Gerar" id="gerar" onclick="genButton()">
+    </div>
+
+  </section>
+  <div id="responsesArea">
+  </div>
+
+  <div id="itensArea">
+  </div>
+
+  <div id="formAdicionar" hidden>
+    <h1>String Control</h1>
+    <p>Digite a quantidade que deseja adicionar:</p>
+    <input type="number" id="qtInputAdd">
+    <input type="button" id="gerarAdd" Value="Gerar">
+  </div>
+
+  <div>
+    <input type="button" name="voltar" id="voltar" value="Voltar" hidden>
+    <input type="button" name="finalizar" id="finalizar" value="Finalizar" onclick="genResponse()" hidden>
+    <input type="button" name="finalizarAdd" id="finalizarAdd" value="Finalizar" hidden>
+    <input type="button" name="adicionar" id="adicionar" value="Adicionar Strings" hidden>
+  </div>
+
+
+  <script type="text/javascript">
+    // Funções para capturar elementos do HTML
+    function get(e) {
+      let element = document.querySelector(e);
+      return element;
+    }
+    function getAll(e) {
+      let element = document.querySelectorAll(e);
+      return element;
+    }
+    /*   **********************************************   */
+    // Elementos da página
+    const formDiv = get('#formDiv');
+    const qtInput = get('#qtInput');
+    const gerar = get('#gerar');
+    const buttonVoltar = get('#voltar');
+    const buttonFinalizar = get('#finalizar');
+    const container = get('#container');
+    const responsesArea = get('#responsesArea');
+    const itensArea = get('#itensArea');
+    const adicionar = get('#adicionar');
+    const formAdicionar = get('#formAdicionar');
+    const qtInputAdd = get('#qtInputAdd');
+    const gerarAdd = get('#gerarAdd');
+    const finalizarAdd = get('#finalizarAdd');
+    /*   **********************************************   */
+
+    /* EVENTOS */
+
+    // Botão voltar
+    buttonVoltar.addEventListener('click', () => {
+      localStorage.clear();
+      clearResponses();
+      adicionar.setAttribute('hidden', 'true');
+      buttonVoltar.setAttribute('hidden', '');
+      window.location.reload();
+
+    });
+
+    // Botão Adicionar
+    adicionar.addEventListener('click', () => {
+      formAdicionar.removeAttribute('hidden');
+      qtInputAdd.removeAttribute('hidden');
+      gerarAdd.removeAttribute('hidden');
+      adicionar.setAttribute('hidden', '');
+    })
+
+    // Botão Gerar do formulário Adicionales
+    gerarAdd.addEventListener('click', () => {
+      genAdd();
+      finalizarAdd.removeAttribute('hidden');
+    });
+
+    finalizarAdd.addEventListener('click', () => {
+      genResponseAdd();
+    })
+
+
+
+    // Limpa o document, gera os inputs solicitados e cria um botão de finalizar
+    function genButton() {
+      hideItem(formDiv);
+      hideAll();
+      genInputs();
+      showItem(buttonFinalizar);
+    }
+    // limpa o document
+    /*
+    function createButton(element) {
+      let elemento = document.createElement(element);
+      elemento.innerHTML = '<input type="button" class="finalize" value="Finalizar" id="gerar" onclick="genResponse()">';
+      container.appendChild(elemento);
+    }
+
+
+    */
+    function hideItem(item) {
+      item.setAttribute('hidden', '');
+    }
+    function showItem(item) {
+      item.removeAttribute('hidden');
+    }
+
+    // gera a quantidade de inputs solicitada
+    function genInputs() {
+      let fim = Number(qtInput.value);
+      localStorage.setItem('qtInput', fim);
+      for (let c = 1; c <= fim; c++) {
+        createDiv(c);
+      }
+    }
+    function genAdd() {
+      let add = Number(qtInputAdd.value);
+      let fim = Number(localStorage.getItem('qtInput')) + 1;
+      let total = add + fim - 1;
+      localStorage.setItem('qtInput', total);
+      for (let c = fim; c <= total; c++) {
+        createDiv(c);
+      }
+      formAdicionar.setAttribute('hidden', '');
+    }
+
+    // Cria uma div com o nome e a resposta do recurso
+    function createDiv(c = 1) {
+      let recurso = document.createElement("div");
+      recurso.innerHTML =
+        `<div class="itens">
+          <h3>Item ${c}</h3>
+          <p>Nome do Recurso: <input type="text" id="nmRecurso${c}"></p>
+          <p>String do Recurso: <input type="text" id="dsRecurso${c}"></p>
+         </div>`;
+      itensArea.appendChild(recurso);
+    }
+    // Cria um button para finalizar a coleta de informações de recurso
+    function createTag(element) {
+      let tag = document.createElement(element);
+      return tag;
+    }
+
+    function appendTagOnBody(item) {
+      responsesArea.appendChild(item);
+    }
+
+    function clearResponses() {
+      while (responsesArea.firstChild) {
+        responsesArea.removeChild(responsesArea.firstChild);
+      }
+    }
+    function clearItens() {
+      while (itensArea.firstChild) {
+        itensArea.removeChild(itensArea.firstChild);
+      }
+    }
+
+    function genResponse() {
+      clearResponses();
+      hideAll();
+      let fim = Number(qtInput.value);
+      for (let c = 1; c <= fim; c++) {
+        let nmRecurso = document.querySelector(`#nmRecurso${c}`);
+        let dsRecurso = document.querySelector(`#dsRecurso${c}`);
+
+        if (nmRecurso.value && dsRecurso.value) {
+          localStorage.setItem(`nmRecurso${c}`, `${nmRecurso.value}`);
+          localStorage.setItem(`dsRecurso${c}`, `${dsRecurso.value}`);
+
+          let button = createTag('input');
+          button.setAttribute('value', `${nmRecurso.value}`);
+          button.setAttribute('type', 'button');
+          button.setAttribute('class', 'storage');
+          button.addEventListener('click', () => window.navigator.clipboard.writeText(dsRecurso.value));
+          appendTagOnBody(button);
+        }
+      }
+      buttonVoltar.removeAttribute('hidden');
+      adicionar.removeAttribute('hidden');
+      clearItens();
+    }
+
+    function genResponseAdd() {
+      let fim = Number(localStorage.getItem('qtInput'));
+      let novo = Number(qtInputAdd.value);
+      let ini = fim - novo + 1;
+      for (let c = ini; c <= fim; c++) {
+        let nmRecurso = document.querySelector(`#nmRecurso${c}`);
+        let dsRecurso = document.querySelector(`#dsRecurso${c}`);
+
+        if (nmRecurso.value && dsRecurso.value) {
+          localStorage.setItem(`nmRecurso${c}`, `${nmRecurso.value}`);
+          localStorage.setItem(`dsRecurso${c}`, `${dsRecurso.value}`);
+
+          let button = createTag('input');
+          button.setAttribute('value', `${nmRecurso.value}`);
+          button.setAttribute('type', 'button');
+          button.setAttribute('class', 'storage');
+          button.addEventListener('click', () => window.navigator.clipboard.writeText(dsRecurso.value));
+          appendTagOnBody(button);
+        }
+      }
+      adicionar.removeAttribute('hidden');
+      finalizarAdd.setAttribute('hidden', '');
+      clearItens();
+    }
+
+
+
+    function hideAll() {
+      let inputs = getAll('input');
+      inputs.forEach((input) => {
+        input.setAttribute('hidden', '');
+      });
+      if (getAll('.itens')) {
+        let inputText = getAll('.itens');
+        inputText.forEach((input) => {
+          input.setAttribute('hidden', '');
+        });
+      }
+
+    }
+    function showAll() {
+      let inputs = getAll('input');
+      inputs.forEach((input) => {
+        input.removeAttribute('hidden');
+      });
+    }
+
+    function lookStorage() {
+      if (localStorage.getItem('nmRecurso1') && localStorage.getItem('dsRecurso1')) {
+        let qtInput = Number(localStorage.getItem('qtInput'));
+
+        for (let c = 1; c <= qtInput; c++) {
+          let nmRecurso = localStorage.getItem(`nmRecurso${c}`);
+          let dsRecurso = localStorage.getItem(`dsRecurso${c}`);
+
+          if (nmRecurso && dsRecurso) {
+            let button = createTag('input');
+            button.setAttribute('value', `${nmRecurso}`);
+            button.setAttribute('type', 'button');
+            button.setAttribute('class', 'storage');
+            button.addEventListener('click', () => window.navigator.clipboard.writeText(dsRecurso));
+            appendTagOnBody(button);
+          }
+        }
+        buttonVoltar.removeAttribute('hidden');
+        adicionar.removeAttribute('hidden');
+        hideItem(formDiv);
+      }
+    }
+    lookStorage()
+  </script>
+</body>
+
+</html>
